@@ -1,2 +1,5 @@
 .venv/
 .env
+*.pyc
+dj_ihona_task/__pycache__/settings.*
+./blog/migrations/
