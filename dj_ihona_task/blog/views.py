@@ -5,8 +5,8 @@ from django.shortcuts import render
 # views.py
 
 from rest_framework import viewsets
-from .models import Tag, Post, Question, UserQAProfile
-from .serializers import TagSerializer, PostSerializer, QuestionSerializer, UserQAProfileSerializer
+from .models import Tag, Post, Question, UserQAProfile, Image
+from .serializers import TagSerializer, PostSerializer, QuestionSerializer, UserQAProfileSerializer, ImageSerializer
 
 class TagViewSet(viewsets.ModelViewSet):
     queryset = Tag.objects.all()
@@ -23,3 +23,7 @@ class QuestionViewSet(viewsets.ModelViewSet):
 class UserQAProfileViewSet(viewsets.ModelViewSet):
     queryset = UserQAProfile.objects.all()
     serializer_class = UserQAProfileSerializer
+
+class ImageViewSet(viewsets.ModelViewSet):
+    queryset = Image.objects.all()
+    serializer_class = ImageSerializer

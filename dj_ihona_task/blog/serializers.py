@@ -11,7 +11,6 @@ class ImageSerializer(serializers.ModelSerializer):
         model = Image
         fields = ['id', 'image', 'post']
 class PostSerializer(serializers.ModelSerializer):
-    images = ImageSerializer(many=True, read_only=True)
     class Meta:
         model = Post
         fields = "__all__"

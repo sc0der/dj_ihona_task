@@ -7,7 +7,7 @@ from drf_yasg.views import get_schema_view
 from drf_yasg import openapi
 from django.urls import path, include
 from rest_framework.routers import DefaultRouter
-from blog.views import TagViewSet, PostViewSet, QuestionViewSet, UserQAProfileViewSet
+from blog.views import TagViewSet, PostViewSet, QuestionViewSet, UserQAProfileViewSet, ImageViewSet
 
 router = DefaultRouter()
 
@@ -15,6 +15,7 @@ router.register(r'tags', TagViewSet)
 router.register(r'posts', PostViewSet)
 router.register(r'questions', QuestionViewSet)
 router.register(r'userprofiles', UserQAProfileViewSet)
+# router.register(r'Images', ImageViewSet) #Unregistered bcz of swagger can not upload images
 
 schema_view = get_schema_view(
    openapi.Info(
