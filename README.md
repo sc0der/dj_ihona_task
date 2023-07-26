@@ -14,13 +14,14 @@ Createa & activate env:
 
 Run project:
     
-    fastapi run 
-
-    ./run.sh 
+    python3 manager.py runserver
     
 [comment]:Run docker-compose to start the project:
 
 [comment]:    $ docker-compose up -d
+
+
+if you run on docker there is set default user for log in: user: `pythonic` pwd: `Ajj!Majji`
 
 The web will run on port: 
 

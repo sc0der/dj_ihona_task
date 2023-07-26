@@ -12,5 +12,10 @@ python3 manage.py migrate
 # Create default user
 python3 manage.py create_default_user
 
+python3 manage.py makemigrations
+
+python3 manage.py migrate
+
+
 # Start your application
 exec "$@"
