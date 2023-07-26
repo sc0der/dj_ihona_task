@@ -1,5 +1,6 @@
 .venv/
 .env
 *.pyc
-dj_ihona_task/__pycache__/settings.*
-./blog/migrations/
+db.sqlite3
+*initial.py
+blog/migrations/0001_initial.py
