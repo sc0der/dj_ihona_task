@@ -1,0 +1,32 @@
+version: '3.8'
+
+services:
+  web:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    command: ["python3", "manage.py", "runserver", "0.0.0.0:8000"]
+
+    volumes:
+      - .:/app
+      - static_volume:/app/staticfiles
+    
+    ports:
+      - "8000:8000"
+      - "8002:80"
+
+    environment:
+      - DEBUG=True  # You'd probably turn this off in production
+
+  nginx:
+    build:
+      context: .
+      dockerfile: Dockerfile.nginx
+    ports:
+      - "80:80"
+      - "8001:80"
+    volumes:
+      - static_volume:/app/staticfiles
+
+volumes:
+  static_volume:
