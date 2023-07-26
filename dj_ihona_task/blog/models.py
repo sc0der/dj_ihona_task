@@ -11,12 +11,14 @@ class Post(models.Model):
     images = models.ManyToManyField('Image', blank=True, related_name="post_images")
     content = models.TextField()
     modification_date = models.DateTimeField(auto_now=True)
-    creation_date = models.DateTimeField(auto_now_add=True)
     tags = models.ManyToManyField(Tag, blank=True)
+    created_at = models.DateTimeField(auto_now_add=True)
 
 class Image(models.Model):
     image = models.ImageField(upload_to='posts/images/')
     post = models.ForeignKey(Post, related_name='image_post', on_delete=models.CASCADE)
+    created_at = models.DateTimeField(auto_now_add=True)
+
 
 class Question(models.Model):
     post = models.ForeignKey(Post, related_name='polls', on_delete=models.CASCADE)
@@ -25,12 +27,15 @@ class Question(models.Model):
     choice_2 = models.CharField(max_length=255)
     choice_3 = models.CharField(max_length=255)
     choice_4 = models.CharField(max_length=255)
+    created_at = models.DateTimeField(auto_now_add=True)
 
 class UserQAProfile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     answered_questions = models.ManyToManyField(Question, through='UserResponse')
+    created_at = models.DateTimeField(auto_now_add=True)
 
 class UserResponse(models.Model):
     profile = models.ForeignKey(UserQAProfile, on_delete=models.CASCADE)
     question = models.ForeignKey(Question, on_delete=models.CASCADE)
     selected_answer = models.CharField(max_length=255)
+    created_at = models.DateTimeField(auto_now_add=True)

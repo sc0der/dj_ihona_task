@@ -1,13 +1,17 @@
 from rest_framework import serializers
 from django.contrib.auth.models import User
-from .models import Tag, Post, Question, UserQAProfile
+from .models import Tag, Post, Question, UserQAProfile, Image
 
 class TagSerializer(serializers.ModelSerializer):
     class Meta:
         model = Tag
         fields = "__all__"
-
+class ImageSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Image
+        fields = ['id', 'image', 'post']
 class PostSerializer(serializers.ModelSerializer):
+    images = ImageSerializer(many=True, read_only=True)
     class Meta:
         model = Post
         fields = "__all__"
@@ -25,4 +29,5 @@ class UserQAProfileSerializer(serializers.ModelSerializer):
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
-        fields = ['id', 'username', 'email']
+        fields = "__all__"
+
