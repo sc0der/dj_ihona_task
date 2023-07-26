@@ -6,6 +6,9 @@ from django.contrib.auth.models import User
 class Tag(models.Model):
     name = models.CharField(max_length=255)
 
+    def __str__(self) -> str:
+        return self.name
+
 class Post(models.Model):
     title = models.CharField(max_length=255)
     images = models.ManyToManyField('Image', blank=True, related_name="post_images")
@@ -14,9 +17,15 @@ class Post(models.Model):
     tags = models.ManyToManyField(Tag, blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
 
+    def __str__(self) -> str:
+        return self.title
+
 class Image(models.Model):
     image = models.ImageField(upload_to='posts/images/')
     created_at = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self) -> str:
+        return f"Image_{self.id}"
 
 
 class Question(models.Model):
@@ -28,13 +37,22 @@ class Question(models.Model):
     choice_4 = models.CharField(max_length=255)
     created_at = models.DateTimeField(auto_now_add=True)
 
+    def __str__(self) -> str:
+        return self.question_text
+
 class UserQAProfile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     answered_questions = models.ManyToManyField(Question, through='UserResponse')
     created_at = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self) -> str:
+        return self.user.username
 
 class UserResponse(models.Model):
     profile = models.ForeignKey(UserQAProfile, on_delete=models.CASCADE)
     question = models.ForeignKey(Question, on_delete=models.CASCADE)
     selected_answer = models.CharField(max_length=255)
     created_at = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self) -> str:
+        return f"Response_To_Question: {self.question.id}"
